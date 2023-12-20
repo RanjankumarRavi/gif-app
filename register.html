@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+ <link rel="stylesheet" href="register.css">
+    <title>gif -app</title>
+  </head>
+  <body id="main">
+    <!-- action="login.html" -->
+ <div class="container">
+<form id="mainform" class="w-25,m-4" >
+    <h2 id="h2" class="mb-3">New Users</h2>
+    <div class="form-floating mb-3">
+        <input type="email" class="form-control" id="emailInp" placeholder="Emai address">
+        <label for="floatingInput">Email address</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="password" class="form-control" id="Passwordinp" placeholder="Password">
+        <label for="floatingPassword">Password</label>
+      </div>
+      <div class="form-floating mb-3">
+        <input type="text" class="form-control" id="user-name" placeholder="user-name" >
+        <label for="floatingPassword">user-name</label>
+      </div>
+ <button type="click"class="btn btn-primary"style="float: right" >Register</button>
+ <a href="login.html"><button class="btn btn-primary me-2" type="button" style="float: right">login</button></a>
+
+    </form>
+</div>
+
+    <script type="module">
+        
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore,doc,setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getAuth,createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+       
+        
+        
+        const firebaseConfig = {
+          apiKey: "AIzaSyAnfqa0YgimkZYU0AwDu3dO4gEKjWgH8QA",
+          authDomain: "gif-app-ec0ec.firebaseapp.com",
+          projectId: "gif-app-ec0ec",
+          storageBucket: "gif-app-ec0ec.appspot.com",
+          messagingSenderId: "610489831295",
+          appId: "1:610489831295:web:1c2ad1bae7683f6baf544a",
+          measurementId: "G-9PGZNW47VL"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        // const analytics = getAnalytics(app);
+        const db=getFirestore();
+        const auth=getAuth(app);
+        let email=document.getElementById("emailInp");
+        let pass=document.getElementById("Passwordinp");
+        let username=document.getElementById("user-name");
+        let mainform =document.getElementById("mainform");
+        
+        let registeruser = evt =>{
+       evt.preventDefault();
+            
+       createUserWithEmailAndPassword(auth,email.value,pass.value)
+       .then(async(Credential)=>{
+          console.log(Credential)
+          alert("register sucessfully ! now you can login")
+       
+       })
+       .catch((error)=>{
+        alert("user already registered")
+        console.log(error);
+       })
+
+       
+        }
+
+        mainform.addEventListener("submit",registeruser);
+      </script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+    
+  </body>
+</html>
